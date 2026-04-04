@@ -1,9 +1,10 @@
 import { Box, Select, FormControl, InputLabel, MenuItem, TextField, Button } from "@mui/material";
 import React from "react";
+import { addActivity } from "../services/api";
 
 const ActivityForm = () => {
 
-    const [Activity, setActivity] = React.useState({
+    const [activity, setActivity] = React.useState({
         type: "RUNNING",
         duration: '',
         caloriesBurned: '',
@@ -14,8 +15,8 @@ const ActivityForm = () => {
         event.preventDefault();
 
         try {
-            // await addActivity(Activity)
-            // onActivityAdd()
+            await addActivity(activity)
+            //onActivityAdd()
             setActivity({
                 type: "RUNNING",
                 duration: '',
@@ -34,8 +35,8 @@ const ActivityForm = () => {
             <FormControl fullWidth sx={{ mb: 2 }}>
                 <InputLabel>Activity Type</InputLabel>
                 <Select
-                    value={Activity.type}
-                    onChange={(e) => setActivity({ ...Activity, type: e.target.value })}
+                    value={activity.type}
+                    onChange={(e) => setActivity({ ...activity, type: e.target.value })}
                 >
                     <MenuItem value="RUNNING">Running</MenuItem>
                     <MenuItem value="CYCLING">Cycling</MenuItem>
@@ -46,14 +47,14 @@ const ActivityForm = () => {
             <TextField fullWidth 
                 label="Duration (minutes)" 
                 type="number" sx={{ mb: 2 }} 
-                value={Activity.duration} 
-                onChange={(e) => setActivity({ ...Activity, duration: e.target.value })} />
+                value={activity.duration} 
+                onChange={(e) => setActivity({ ...activity, duration: e.target.value })} />
             
             <TextField fullWidth 
                 label="Calories Burned" 
                 type="number" sx={{ mb: 2 }} 
-                value={Activity.caloriesBurned} 
-                onChange={(e) => setActivity({ ...Activity, caloriesBurned: e.target.value })} />
+                value={activity.caloriesBurned} 
+                onChange={(e) => setActivity({ ...activity, caloriesBurned: e.target.value })} />
             
             <Button variant="contained" type="submit">Add Activity</Button>
         </Box>
